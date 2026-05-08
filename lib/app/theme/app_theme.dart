@@ -33,6 +33,17 @@ abstract class AppTheme {
   static final ColorScheme _darkScheme = ColorScheme.fromSeed(
     seedColor: AppColors.primaryDark,
     brightness: Brightness.dark,
+  ).copyWith(
+    // Ensure surfaces/containers are usable across the app without hardcoded
+    // light-only colors.
+    surface: const Color(0xFF0F1115),
+    onSurface: const Color(0xFFE9E9EA),
+    surfaceContainerLowest: const Color(0xFF0B0D10),
+    surfaceContainerLow: const Color(0xFF141821),
+    surfaceContainer: const Color(0xFF191E28),
+    onSurfaceVariant: const Color(0xFFB8BCC4),
+    outline: const Color(0xFF2B3240),
+    outlineVariant: const Color(0xFF232A37),
   );
 
   static ThemeData _build(ColorScheme scheme) {
@@ -68,9 +79,9 @@ abstract class AppTheme {
       ),
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
-        fillColor: AppColors.backgroundAlt,
+        fillColor: scheme.surfaceContainerLow,
         hintStyle: AppTextStyles.paragraphRegular15.copyWith(
-          color: AppColors.textMuted,
+          color: scheme.onSurfaceVariant,
         ),
         contentPadding: const EdgeInsets.symmetric(
           horizontal: 16,
@@ -78,11 +89,11 @@ abstract class AppTheme {
         ),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide: const BorderSide(color: AppColors.border),
+          borderSide: BorderSide(color: scheme.outlineVariant),
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide: const BorderSide(color: AppColors.border),
+          borderSide: BorderSide(color: scheme.outlineVariant),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
@@ -103,14 +114,14 @@ abstract class AppTheme {
       ),
       textButtonTheme: TextButtonThemeData(
         style: TextButton.styleFrom(
-          foregroundColor: AppColors.link,
+          foregroundColor: scheme.primary,
           textStyle: AppTextStyles.labelMedium15,
         ),
       ),
       outlinedButtonTheme: OutlinedButtonThemeData(
         style: OutlinedButton.styleFrom(
           foregroundColor: scheme.onSurface,
-          side: const BorderSide(color: AppColors.border),
+          side: BorderSide(color: scheme.outlineVariant),
           textStyle: AppTextStyles.labelMedium15,
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
           shape: RoundedRectangleBorder(
